@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- dtd file is used to create the hibernate.cfg.xml file -->
+<hibernate-configuration>
+	<session-factory>
+		<!-- configuration of the database: connect to the database -->
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- jdbc:mysql:///hibernate01, localhost:3306 can be omitted because it is default -->
+		<property name="connection.url">jdbc:mysql://localhost:3306/hibernate01</property>
+		
+		<!-- configuration of the hibernate: connect to the framework hibernate -->
+		<!-- setup the dialect to tell hibernate which database and what version of the database
+			 it connects to -->
+		<!-- InnoDB is a general-purpose storage engine that balances high reliability and high performance. -->
+		<property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+		
+		<!-- whether show up the SQL statement in the console when doing the action to the database -->
+		<property name="show_sql">true</property>
+		
+		<!-- whether format the SQL statement -->
+		<property name="format_sql">true</property>
+		
+		<!-- designate a strategy for generating data table -->
+		<!-- create: generate one row of the data in the table according to the hbm.xml, 
+			 and the rest of the records stored in the table will be erased -->
+		<!-- create-drop: generate one row of the data in the table according to the 
+			 hbm.xml, once the SessionFactory is closed, this record will also be erased -->
+		<!-- update: generate one row of the data in the table, if the information in the
+		 	 hbm.xml doesn't match the information of the table, hibernate will update the
+		 	 table information according to hbm.xml and save the data and the structure
+		 	 of the table already existed -->
+		<!-- validate: compare the hbm.xml with the table in the database, if the information
+			 of the table doesn't match the hbm.xml, it will throw an exception -->
+		<property name="hbm2ddl.auto">update</property>
+		
+		<!-- for using annotations of JPA us the mark language below -->
+		<mapping class="com.hibernate.hello.News"/>
+		
+		<!-- the value should be file path, eg: a/b/c -->
+		<mapping resource="News.hbm.xml"></mapping>
+	</session-factory>
+</hibernate-configuration>
