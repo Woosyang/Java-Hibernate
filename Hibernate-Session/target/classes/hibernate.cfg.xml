@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- dtd file is used to create the hibernate.cfg.xml file -->
+<hibernate-configuration>
+	<session-factory>
+		<!-- configuration of the database: connect to the database -->
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- jdbc:mysql:///hibernate01, localhost:3306 can be omitted because it is default -->
+		<property name="connection.url">jdbc:mysql://localhost:3306/hibernate02</property>
+		
+		<!-- configuration of the hibernate: connect to the framework hibernate -->
+		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		
+		<!-- whether show up the SQL statement in the console when doing the action to the database -->
+		<property name="show_sql">true</property>
+		
+		<!-- whether format the SQL statement -->
+		<property name="format_sql">true</property>
+		
+		<!-- designate a strategy for generating data table -->
+		<property name="hbm2ddl.auto">update</property>
+		
+		<!-- setup the isolation level of the transaction -->
+		<!-- 1 -> read uncommitted, 2 -> read committed, 4 -> repeatable read, 8 -> serializeable -->
+		<property name="connection.isolation">2</property>
+		
+		<!-- after deleting the object, make the OID of the object become to null -->
+		<property name="use_identifier_rollback">true</property>
+		
+		<!-- configure the c3p0 to manage database connections  -->
+		
+		<!-- the maximum number of connections it can maintain at any given time -->
+		<property name="hibernate.c3p0.max_size">10</property>
+		
+		<!-- the minimum number of connections it should maintain at any given time -->
+		<property name="hibernate.c3p0.min_size">5</property>
+		
+		<!-- how many connections it should try to acquire if the pool runs out of 
+		     available connections -->
+		<property name="hibernate.c3p0.acquire_increment">2</property>
+		
+		<!-- how often the pool periodically check a connection for it's validity -->
+		<property name="hibernate.c3p0.idle_test_period">2000</property>
+		
+		<!-- the number of seconds an unused connection will be kept before being discarded -->
+		<property name="hibernate.c3p0.timeout">2000</property>
+		
+		<!-- the number of the Statements inside cache -->
+		<property name="hibernate.c3p0.max_statements">10</property>
+		
+		<!-- the value should be file path, eg: a/b/c -->
+		<mapping resource="News.hbm.xml"></mapping>
+	</session-factory>
+</hibernate-configuration>
