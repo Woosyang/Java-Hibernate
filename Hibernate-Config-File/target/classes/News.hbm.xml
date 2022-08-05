@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<!-- usually one class file maps to one configuration file, use "package" as the prefix 
+	     can configure multiple class files in the same directory -->
+	<!-- no need to type "name = 'com.hibernate.entity.News'" -->
+	<class name="News" table="Info" dynamic-update="true" dynamic-insert="true">
+	<!-- you can name the table whatever you want, table name can mismatch the name 
+	     of the java entity class -->
+		<id name="id" type="java.lang.Integer">
+			<column name="ID"/> 
+			<!-- <generator class="increment" />  -->
+			<!-- <generator class="native" /> -->
+			<!-- <generator class="identity" /> -->
+			<generator class="native" /> <!-- include all above -->
+		</id>
+		
+		<!-- <property name="title" type="string" column="TITLE" unique="true" update="false"
+			index="info_index" length="20"> -->
+		<property name="title" type="string" column="TITLE">
+			<!-- set the column inside the <property> -->
+			<!-- <column name="TITLE"/> -->
+		</property>
+		
+		<property name="author" type="java.lang.String">
+			<column name="AUTHOR"/>
+		</property>
+		
+		<property name="date" type="timestamp">
+			<column name="DATE"/>
+		</property>
+		
+		<!-- maps to the derived property -->
+		<property name="des" formula="(select concat(author, ': ', title) from Info n where n.id = id)">
+		</property>
+		
+		<!-- maps to the CLOB object -->
+		<!-- if you want to map to a certain SQL data type, use "sql-type" -->
+		<property name="content" type="clob">
+			<column name="Content" sql-type="mediumtext"></column>
+		</property>
+		
+		<!-- maps to the BLOB object  -->
+		<property name="image" type="blob">
+			<column name="Image" sql-type="mediumblob"></column>
+		</property>
+	</class>
+</hibernate-mapping>
