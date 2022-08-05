@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<!-- if the class is People, it will show "People" as the value in the 
+		 Type(discriminator) column -->
+	<class name="People" table="People" discriminator-value="People">
+		<id name="ID" type="java.lang.Integer">
+			<column name="P_ID"/>
+			<generator class="native" />
+		</id>
+		
+		<!-- if we want to use <subclass> for mapping, we need to add one more column
+			 as the "Discriminator" to tell the record of each row belongs to which 
+			 instance because subclass and parent class share the same table.
+		 -->
+		 <discriminator column="Type" type="string"></discriminator>
+		 
+		<property name="Name" type="string" column="P_Name"></property>
+		
+		<property name="Age" type="int">
+			<column name="P_Age"></column>
+		</property>
+		
+		<!-- mapping for the subclass Student -->
+		<!-- use <subclass> to for mapping -->
+		<!-- if the class is Student, it will show "Student" as the value in the 
+		     Type(discriminator) column -->
+		<subclass name="Student" discriminator-value="Student">
+			<property name="School" type="string" column="School"></property>
+		</subclass>
+	</class>
+</hibernate-mapping>

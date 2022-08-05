@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<!-- by using <joined-subclass>, there is no need to use the discriminator -->
+	<class name="Animal" table="Animal">
+		<id name="ID" type="java.lang.Integer">
+			<column name="A_ID"/>
+			<generator class="native" />
+		</id>
+		 
+		<property name="Name" type="string" column="A_Name"></property>
+		<!-- If we use joined-subclass for mapping, it can make each entity have its
+			 own table, in this way, parent class will be stored in the its own table
+			 the record of subclass instance is saved in both parent table and subclass
+			 table. The intersection of fields in both parent class and subclass is saved
+			 in the parent table and the extra fields for subclass will be saved in the
+			 table of the subclass -->
+		<!-- There is no need to use discriminator and only use <key> for mapping the 
+			 primary key of each subclass -->
+		<!-- The fields of the subclass can have the not-null constraint -->
+		<joined-subclass name="Dog" table="Dog">
+			<!-- D_ID is the foreign key in table Animal -->
+			<!-- D_ID is also the primary key in table Dog -->
+			<key column="D_ID"></key>
+			<property name="Food" type="string" column="Food"></property>
+		</joined-subclass>
+	</class>
+</hibernate-mapping>

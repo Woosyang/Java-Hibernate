@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Fruit" table="Fruit">
+		<id name="ID" type="java.lang.Integer">
+			<column name="F_ID"/>
+			<generator class="increment" />
+		</id>
+		 
+		<property name="Name" type="string" column="F_Name"></property>
+		
+		<!-- If we use <union-subclass> for mapping there is no need to add <key> for
+		     foreign key and discriminator as the extra column and each entity will 
+		     be mapped to an independent table.-->
+		<!-- we should not use the "native" as the generator, because it will choose  
+			 which ID and sequence to use depends on the database vendor -->
+	 	<!-- when we use the <union-subclass>, we need to make sure the ID of each entity  
+	 		 in its own table should be consecutive. eg: ID 1 for parent, ID 2 for subclass... -->
+		<union-subclass name="Grape" table="Grape">
+			<property name="Color" column="G_Color" type="string"></property>
+		</union-subclass>
+	</class>
+</hibernate-mapping>
