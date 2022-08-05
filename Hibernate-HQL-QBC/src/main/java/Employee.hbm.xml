@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Employee" table="Employee">
+		<id name="EID" type="java.lang.Integer">
+			<column name="EID"/>
+			<generator class="native" />
+		</id>
+		
+		<!-- name inside <property> must be consistent with the field name of the Java Class -->
+		<property name="Name" type="string" column="NAME"></property>
+		
+		<property name="Salary" type="java.lang.Integer" column="Salary"></property>
+		
+		<many-to-one name="Dept" class="Department" column="DeptID" lazy="false"> </many-to-one>
+	</class>
+	
+	<!-- use ![CDATA[]] to escape the ">" and "<" syntax -->
+	<query name = "salEmps"><![CDATA[From Employee e Where e.Salary > : minSal And e.Salary < : maxSal]]></query>
+
+</hibernate-mapping>
