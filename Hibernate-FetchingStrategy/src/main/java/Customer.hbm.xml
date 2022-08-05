@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Customer" table="Customer" lazy="true" batch-size="5">
+		<id name="CustID" type="java.lang.Integer">
+			<column name="CustID"/>
+			<generator class="native" />
+		</id>
+		
+		<property name="CustName" type="string" column="C_Name"></property>
+		
+		<!-- lazy = "false" or lazy = "extra" for OneToManyLevelFetchingStrategy -->
+		<!-- lazy="false"  fetch="join" -->						
+		<set name="Orders" table="C_Order" inverse="true" 
+			 batch-size="2" fetch="subselect" cascade="save-update">
+			<key column="CustID"></key>
+			<one-to-many class="Order"></one-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
