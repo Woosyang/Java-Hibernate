@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Login</title>
+	</head>
+	<body>
+		<div align="center">
+			<h1>Example Of Form In Html</h1>
+			<pre>
+				post: send the data, based on the HTTP protocol, have no restrictions on data length<br> 
+					  can't see the requested parameters of the url, safe<br>
+				get: default(method="", not mentioned), request the data, based on the HTTP protocol<br>
+					 have length restrictions, can see the requested parameters of the url, not safe<br>
+				In Html:<br>
+				action: request the resource of the web server<br>
+				name: it must exist when sending the request to the server, unique<br>
+				id: used for front end, unique<br>
+			</pre>
+			<form method="post" action="http://localhost:8888/index.html">
+				UserName: <input type ="text" name="uname" id="uname"/>
+				&nbsp; &nbsp; &nbsp; &nbsp; <!-- 4 spaces -->
+				<!-- name is used for back end, id is used for front end  -->
+				PassWord: <input type="password" name="pwd" id="pwd"/>
+				&nbsp; &nbsp; &nbsp; &nbsp;
+				<input type="submit" value = "Register"/>
+			</form>
+		</div>
+	</body>
+</html>
