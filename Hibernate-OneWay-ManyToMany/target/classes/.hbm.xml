@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Customer" table="Customer">
+		<!-- id name="CustID" should be consistent with the field name  -->
+		<id name="CustID" type="java.lang.Integer">
+			<column name="CustID"/>
+			<generator class="native" /> <!-- generating strategy, native, hilo  -->
+		</id>
+		
+		<property name="CustName" type="string" column="C_Name"></property>
+	</class>
+</hibernate-mapping>
