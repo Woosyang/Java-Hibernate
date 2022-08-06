@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Manager" table="Manager">
+		<id name="MgrID" type="java.lang.Integer">
+			<column name="MGR_ID"/>
+			<generator class="native" />
+		</id>
+		
+		<property name="MgrName" type="string" column="MGR_NAME"></property>
+		
+		<!-- Since the corresponding table(Department) has the foreign key -->
+		<!-- use <one-to-one> to display the mapping relationship -->
+		<!-- the one without foreign key use <one-to-one>, property-ref is 
+			 the name of a property of the associated class that is joined to 
+			 this foreign key. If not specified, the primary key of the associated 
+			 class is used -->
+			 <!-- Mgr in the <many-to-one name="Mgr"> in Department.hbm.xml  -->
+		<one-to-one name="Dept" class="Department" property-ref="Mgr"></one-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Department" table="Departments">
+		<id name="DeptID" type="java.lang.Integer">
+			<column name="DEPT_ID"/>
+			<generator class="native" />
+		</id>
+		
+		<property name="DeptName" type="string" column="DEPT_NAME"></property>
+		<!-- OneToOne based on using foreign key, the foreign key can be on either side -->
+		<!-- use <many-to-one> to display the foreign key -->
+		<!-- use <many-to-one> to display the OneToOne mapping relationship -->
+		<many-to-one name="Mgr" class="Manager" column="MGR_ID" unique="true"></many-to-one>
+	</class>
+</hibernate-mapping>
