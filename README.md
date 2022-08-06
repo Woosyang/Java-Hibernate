@@ -1,2 +1,2 @@
-# JavaSE
+# Java Hibernate Orm Framework
 Tutorial
