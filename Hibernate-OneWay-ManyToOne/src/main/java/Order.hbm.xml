@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Order" table="o_rder">
+		<id name="orderID" type="java.lang.Integer">
+			<column name="OID"/>
+			<generator class="native" />
+		</id>
+		
+		<property name="orderName" type="java.lang.String">
+			<column name="O_Name"/>
+		</property>
+		<!-- Mapping ManyToOne: n orders to 1 customer -->
+		<!-- column="CustID" is the foreign key -->
+		<!-- name="customer" means customer is the field of the Many(Order), and the 
+		     field belongs to One(Customer), the name should be the same as the 
+		     corresponding field name of the Many(Order) -->
+		<!-- class="Customer" means corresponding class name of the One -->
+		<!-- column="CustID" means the foreign key of the Many which mapping to corresponding
+		     One -->
+		<many-to-one name="customer" class="Customer" column="CustID"> </many-to-one>
+	</class>
+</hibernate-mapping>
