@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Item" table="ITEM">
+		<id name="ID" type="java.lang.Integer">
+			<column name="ID"/>
+			<generator class="native" />
+		</id>
+		
+		<property name="Name" type="java.lang.String">
+			<column name="Name"/>
+		</property>
+		
+		<!-- inverse="true" let the Class Category be in charge of the relationship  -->
+		<set name="Categories" table="Category_Item" inverse="true">
+			<key>
+				<column name="I_ID"></column>
+			</key>
+			<many-to-many class="Category" column="C_ID"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
