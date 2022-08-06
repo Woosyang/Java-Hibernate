@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Department" table="Departments">
+		<id name="DeptID" type="java.lang.Integer">
+			<column name="DEPT_ID"/>
+			<!-- mapping based on the primary key, use foreign as the generating
+			     strategy, generate its own primary key according to the primary
+			     key of the corresponding object, can't generate its own primary
+			     key independently -->
+			<generator class="foreign">
+				<!-- Mgr, field name of the Department -->
+				<!-- <param> makes which field of the current object as the corresponding
+				     object -->
+				<param name="property">Mgr</param>
+			</generator>
+		</id>
+		
+		<property name="DeptName" type="string" column="DEPT_NAME"></property>
+		
+		<!-- constrained specifies that a foreign key constraint on the primary key of the mapped table 
+			 references the table of the associated class  -->
+		<one-to-one name="Mgr" class="Manager" constrained="true"></one-to-one>
+	</class>
+</hibernate-mapping>
