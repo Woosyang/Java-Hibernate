@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/hibernate04</property>
+		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="connection.isolation">2</property>
+		
+		<!-- enable query caching -->
+		<property name="cache.use_query_cache">true</property>
+		
+		<!-- enable the usage of second level cache  -->
+		
+		<property name="cache.use_second_level_cache">true</property>
+		
+		<!-- configure the setting of EHcache -->
+		<property name="hibernate.cache.region.factory_class"> org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		
+		<!-- configure the setting for session management -->
+												  <!-- jta, managed: Hibernate-->
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		<!-- configure the batch job size  -->
+		<property name="hibernate.jdbc.batch_size">20</property>
+		
+		<mapping resource="Department.hbm.xml"></mapping>
+		<mapping resource="Employee.hbm.xml"></mapping>
+		
+		<!-- concurrency strategies for 2nd level cache -->
+		<!-- the value for class field must be the absolute path of the entity class -->
+		<!-- comment out if using <cache usage="read-write"/> in Employee.hbm.xml  -->
+		<!-- <class-cache usage="read-write" class="com.hibernate.entity.Employee"/> -->
+		
+		<class-cache usage="read-write" class="com.hibernate.entity.Department"/>
+		<!-- <collection-cache usage="read-write" collection="com.hibernate.entity.Department.Employees"/> -->
+	</session-factory>
+</hibernate-configuration>
