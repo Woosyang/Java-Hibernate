@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Customer" table="Customer">
+		<!-- id name="CustID" should be consistent with the field name  -->
+		<id name="CustID" type="java.lang.Integer">
+			<column name="CustID"/>
+			<generator class="native" /> <!-- generating strategy, native, hilo  -->
+		</id>
+		
+		<property name="CustName" type="string" column="C_Name"></property>
+		
+		<!-- Mapping the set from One of OneToMany -->
+		<!-- table="Orde_r": the corresponding record of the set is stored in the table Orde_r -->
+		<!-- table should be consistent with the table of Many -->
+		
+		<!-- inverse="" decides which side(One/Many) to maintain the relationship -->
+		<!-- usually set inverse="true" in the Many side to let the Many side to be in
+			 charge of the relationship -->
+		<!-- It is the One side -->
+													<!-- cascade="delete-orphan" --> 
+													<!-- cascade="delete" -->
+		<!-- use order-by to create a select query is used with the column name of the table -->
+		<!-- order-by can be used with SQL function -->													
+		<set name="Os" table="Orde_r" inverse="true"  cascade="save-update" order-by="O_Name DESC">
+			<!-- <many-to-one name="customer" class="Customer" column="CustID"> -->
+			<!-- foreign key -->
+			<key column="CustID"></key>
+			<!-- which class will be mapped  -->
+			<one-to-many class="Order"></one-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+	<class name="Order" table="o_rder">
+		<id name="orderID" type="java.lang.Integer">
+			<column name="OID"/>
+			<generator class="native" />
+		</id>
+		
+		<property name="orderName" type="java.lang.String">
+			<column name="O_Name"/>
+		</property>
+		<!-- inverse = false means it is in charge of maintaining the relationship -->
+		<many-to-one name="customer" class="Customer" column="CustID" lazy="false"> </many-to-one>
+	</class>
+</hibernate-mapping>
