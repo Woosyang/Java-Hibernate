@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--optional: select-before-update="true" -->
+	<class name="com.hibernate.entity.News" table="News">
+		<!-- <id name="id" type="java.lang.Integer" unsaved-value="100"> -->
+		<id name="id" type="java.lang.Integer">
+			<column name="ID"/>
+			<generator class="native" /> <!-- generating strategy, native, hilo  -->
+		</id>
+		
+		<property name="title" type="java.lang.String">
+			<column name="TITLE"/>
+		</property>
+		
+		<property name="author" type="java.lang.String">
+			<column name="AUTHOR"/>
+		</property>
+		
+		<property name="date" type="java.sql.Date">
+			<column name="DATE"/>
+		</property>
+	</class>
+</hibernate-mapping>
